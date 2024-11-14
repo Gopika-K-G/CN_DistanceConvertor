@@ -10,7 +10,7 @@ def index():
 
 # Function to send data to TCP server
 def send_to_tcp_server(value, from_unit, to_unit):
-    server_address = ('localhost', 5002)  # Replace with server's IP
+    server_address = ('https://cn-distanceconvertor-1.onrender.com', 5002)  # Replace with server's IP
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tcp_socket:
         tcp_socket.connect(server_address)
         tcp_socket.sendall(f"{value},{from_unit},{to_unit}".encode())
