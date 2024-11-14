@@ -1,5 +1,0 @@
-type: worker  # Run as a worker since it's a background process
-name: tcp-server
-env: python
-buildCommand: "pip install -r tcp_server/requirements.txt"
-startCommand: "python tcp_server/tcp_server.py"

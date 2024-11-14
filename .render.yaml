@@ -1,0 +1,27 @@
+services:
+  - name: client
+    type: web
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    envVars:
+      - key: PORT
+        value: 5000  # Flask default port
+
+  - name: tcp-server
+    type: worker
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python tcp_server.py"
+    envVars:
+      - key: PORT
+        value: 5002  # Change this if needed
+
+  - name: udp-server
+    type: worker
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python udp_server.py"
+    envVars:
+      - key: PORT
+        value: 5003  # Change this if needed
