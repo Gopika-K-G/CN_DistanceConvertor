@@ -26,7 +26,7 @@ def send_to_udp_server(value, from_unit, to_unit):
     return result.decode()
 
 # Route to handle the form submission and communicate with the server
-@app.route('https://cn-distanceconvertor-1.onrender.com/convert', methods=['POST'])
+@app.route('/convert', methods=['POST'])
 def convert():
     value = request.form.get('value')
     from_unit = request.form.get('from_unit')
