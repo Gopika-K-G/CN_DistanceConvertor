@@ -1,5 +1,3 @@
-# tcp_server.py
-
 import socket
 import os
 
@@ -26,19 +24,25 @@ def convert_distance(value, from_unit, to_unit):
 def tcp_server(port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(('0.0.0.0', port))
-    server_socket.listen()
+    server_socket.listen(1)
 
     print(f"TCP Server listening on port {port}")
     while True:
         client_socket, addr = server_socket.accept()
         data = client_socket.recv(1024).decode()
-        value, from_unit, to_unit = data.split(',')
-        converted_value = convert_distance(float(value), from_unit, to_unit)
+        parts = data.split(',')
 
-        print(f"TCP Request from {addr[0]}: {value} {from_unit} to {to_unit}")
+        if len(parts) == 3:
+            value, from_unit, to_unit = parts
+            converted_value = convert_distance(float(value), from_unit, to_unit)
+            print(f"TCP Request from {addr[0]}: {value} {from_unit} to {to_unit}")
+        else:
+            converted_value = "Invalid input format. Please provide: value,from_unit,to_unit"
+            print(f"Received invalid input from {addr[0]}: {data}")
+
         client_socket.sendall(str(converted_value).encode())
         client_socket.close()
 
 if __name__ == '__main__':
-    tcp_port = int(os.environ.get("TCP_PORT", 5002))  # Use environment variable for TCP port
+    tcp_port = int(os.environ.get("PORT", 5002))
     tcp_server(tcp_port)
