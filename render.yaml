@@ -3,7 +3,8 @@ services:
     type: web
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app.py"
+    startCommand: "gunicorn client:app"
+    pythonVersion: "3.9"
     envVars:
       - key: PORT
         value: 5000  # Flask default port
