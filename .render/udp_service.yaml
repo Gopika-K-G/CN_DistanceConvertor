@@ -1,0 +1,5 @@
+type: worker  # Run as a worker
+name: udp-server
+env: python
+buildCommand: "pip install -r udp_server/requirements.txt"
+startCommand: "python udp_server/udp_server.py"
